@@ -15,4 +15,10 @@ class Menu extends Model
         'price',
         'image',
     ];
+
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class, 'transaction_menus')
+            ->withPivot(['quantity', 'total', 'price']);
+    }
 }

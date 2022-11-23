@@ -27,3 +27,4 @@ Route::group([
 
 
 Route::apiResource('menu', App\Http\Controllers\Api\MenuController::class);
+Route::apiResource('transaction', App\Http\Controllers\Api\TransactionController::class);

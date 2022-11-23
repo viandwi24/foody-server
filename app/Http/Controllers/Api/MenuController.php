@@ -45,7 +45,7 @@ class MenuController extends Controller
         return response()->json([
             'success' => true,
             'data' => $create
-        ]);
+        ], 201);
     }
 
     /**
@@ -77,6 +77,7 @@ class MenuController extends Controller
             'description' => 'string',
             'image' => 'string',
         ]);
+
         $menu->update($request->only([
             'name',
             'price',

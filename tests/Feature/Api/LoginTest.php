@@ -19,7 +19,7 @@ class LoginTest extends TestCase
             ->postJson(
                 '/api/auth/login',
                 [
-                    'email' => 'test@example.com',
+                    'email' => 'owner@example.com',
                     'password' => 'password',
                 ]
             );
