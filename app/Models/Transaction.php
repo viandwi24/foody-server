@@ -34,7 +34,7 @@ class Transaction extends Model
     {
         $code = 'tx_';
         // generate random str
-        $length = 15;
+        $length = 10;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         for ($i = 0; $i < $length; $i++) {

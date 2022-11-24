@@ -15,13 +15,28 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = Transaction::with('menus')->get();
+        $request->validate([
+            'filter.status' => 'in:pending,processing,finished,declined'
+        ]);
+
+        $transactions = Transaction::with('menus');
+
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            foreach ($filters as $key => $value) {
+                $transactions = $transactions->where($key, $value);
+            }
+        }
+
+        $transactions = $transactions->get();
+
         return response()->json([
             'success' => true,
             'message' => 'List Data Transaction',
-            'data' => $transactions
+            'data' => $transactions,
+            'request' => $request->all(),
         ], 200);
     }
 
@@ -33,6 +48,10 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'status' => 'in:pending,processing,finished,declined'
+        ]);
+
         $request->validate([
             'user_name' => 'required',
             // 'total' => 'required',
